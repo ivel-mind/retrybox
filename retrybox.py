@@ -1,0 +1,20 @@
+"""Retry a call a fixed number of times."""
+from __future__ import annotations
+
+from collections.abc import Callable
+from typing import TypeVar
+
+T = TypeVar("T")
+
+
+def retry(fn: Callable[[], T], times: int) -> T:
+    if times < 1:
+        raise ValueError("次数至少为 1")
+    last: Exception | None = None
+    for _ in range(times):
+        try:
+            return fn()
+        except Exception as exc:
+            last = exc
+    assert last is not None
+    raise last
