@@ -1,0 +1,15 @@
+# retrybox
+
+Call a function up to N times. The last exception is raised when every attempt fails.
+
+```python
+from retrybox import retry
+
+retry(lambda: load(), 3)
+```
+
+```bash
+python -m unittest test_retrybox.py
+```
+
+MIT
