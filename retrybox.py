@@ -18,3 +18,10 @@ def retry(fn: Callable[[], T], times: int) -> T:
             last = exc
     assert last is not None
     raise last
+
+
+def try_retry(fn: Callable[[], T], times: int) -> tuple[bool, T | Exception]:
+    try:
+        return True, retry(fn, times)
+    except Exception as exc:
+        return False, exc
