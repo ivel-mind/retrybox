@@ -3,9 +3,10 @@
 Call a function up to N times. The last exception is raised when every attempt fails.
 
 ```python
-from retrybox import retry
+from retrybox import retry, try_retry
 
 retry(lambda: load(), 3)
+ok, value = try_retry(lambda: load(), 3)
 ```
 
 ```bash
