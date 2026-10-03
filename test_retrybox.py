@@ -1,6 +1,6 @@
 import unittest
 
-from retrybox import retry, try_retry
+from retrybox import attempt_of, retry, try_retry
 
 
 class RetryboxTest(unittest.TestCase):
@@ -14,6 +14,8 @@ class RetryboxTest(unittest.TestCase):
             return "ok"
 
         self.assertEqual(retry(flaky, 3), "ok")
+        state["n"] = 0
+        self.assertEqual(attempt_of(flaky, 3), ("ok", 2))
 
     def test_try_retry(self) -> None:
         ok, value = try_retry(lambda: "ok", 1)
