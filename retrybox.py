@@ -43,3 +43,8 @@ def try_retry(fn: Callable[[], T], times: int) -> tuple[bool, T | Exception]:
 def exhausted(fn: Callable[[], T], times: int) -> bool:
     ok, _ = try_retry(fn, times)
     return not ok
+
+
+def succeeds(fn: Callable[[], T], times: int) -> bool:
+    ok, _ = try_retry(fn, times)
+    return ok
