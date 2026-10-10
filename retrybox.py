@@ -48,3 +48,16 @@ def exhausted(fn: Callable[[], T], times: int) -> bool:
 def succeeds(fn: Callable[[], T], times: int) -> bool:
     ok, _ = try_retry(fn, times)
     return ok
+
+
+def failures(fn: Callable[[], T], times: int) -> int:
+    if times < 1:
+        raise ValueError("次数至少为 1")
+    count = 0
+    for _ in range(times):
+        try:
+            fn()
+            return count
+        except Exception:
+            count += 1
+    return count
