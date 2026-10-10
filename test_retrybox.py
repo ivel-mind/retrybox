@@ -1,6 +1,6 @@
 import unittest
 
-from retrybox import attempt_of, exhausted, retry, succeeds, try_retry
+from retrybox import attempt_of, exhausted, failures, retry, succeeds, try_retry
 
 
 class RetryboxTest(unittest.TestCase):
@@ -37,6 +37,8 @@ class RetryboxTest(unittest.TestCase):
         self.assertFalse(exhausted(lambda: "ok", 1))
         self.assertTrue(succeeds(lambda: "ok", 1))
         self.assertFalse(succeeds(always, 2))
+        self.assertEqual(failures(lambda: "ok", 1), 0)
+        self.assertEqual(failures(always, 2), 2)
 
 
 if __name__ == "__main__":
