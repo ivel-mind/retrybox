@@ -61,3 +61,7 @@ def failures(fn: Callable[[], T], times: int) -> int:
         except Exception:
             count += 1
     return count
+
+
+def room(fn: Callable[[], T], times: int) -> int:
+    return times - failures(fn, times)
