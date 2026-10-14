@@ -65,3 +65,17 @@ def failures(fn: Callable[[], T], times: int) -> int:
 
 def room(fn: Callable[[], T], times: int) -> int:
     return times - failures(fn, times)
+
+
+def used(fn: Callable[[], T], times: int) -> int:
+    if times < 1:
+        raise ValueError("次数至少为 1")
+    count = 0
+    for _ in range(times):
+        count += 1
+        try:
+            fn()
+            return count
+        except Exception:
+            continue
+    return count
