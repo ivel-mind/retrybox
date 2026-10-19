@@ -79,3 +79,7 @@ def used(fn: Callable[[], T], times: int) -> int:
         except Exception:
             continue
     return count
+
+
+def spare(fn: Callable[[], T], times: int) -> int:
+    return times - used(fn, times)
