@@ -83,3 +83,7 @@ def used(fn: Callable[[], T], times: int) -> int:
 
 def spare(fn: Callable[[], T], times: int) -> int:
     return times - used(fn, times)
+
+
+def spent(fn: Callable[[], T], times: int) -> bool:
+    return spare(fn, times) == 0
