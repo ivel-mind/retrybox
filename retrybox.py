@@ -87,3 +87,7 @@ def spare(fn: Callable[[], T], times: int) -> int:
 
 def spent(fn: Callable[[], T], times: int) -> bool:
     return spare(fn, times) == 0
+
+
+def saved(fn: Callable[[], T], times: int) -> bool:
+    return succeeds(fn, times) and spare(fn, times) > 0
