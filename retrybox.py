@@ -91,3 +91,7 @@ def spent(fn: Callable[[], T], times: int) -> bool:
 
 def saved(fn: Callable[[], T], times: int) -> bool:
     return succeeds(fn, times) and spare(fn, times) > 0
+
+
+def tight(fn: Callable[[], T], times: int) -> bool:
+    return succeeds(fn, times) and spare(fn, times) == 0
