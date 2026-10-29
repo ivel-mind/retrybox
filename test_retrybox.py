@@ -1,6 +1,6 @@
 import unittest
 
-from retrybox import attempt_of, exhausted, failures, retry, room, saved, spare, spent, succeeds, tight, try_retry, used
+from retrybox import attempt_of, exhausted, failures, retry, room, saved, spare, spent, succeeds, tight, try_retry, used, once
 
 
 class RetryboxTest(unittest.TestCase):
@@ -52,6 +52,9 @@ class RetryboxTest(unittest.TestCase):
         self.assertTrue(tight(lambda: "ok", 1))
         self.assertFalse(tight(lambda: "ok", 3))
 
+
+        self.assertTrue(once(lambda: "ok", 3))
+        self.assertFalse(once(always, 2))
 
 if __name__ == "__main__":
     unittest.main()
