@@ -98,3 +98,6 @@ def tight(fn: Callable[[], T], times: int) -> bool:
 
 def once(fn: Callable[[], T], times: int) -> bool:
     return succeeds(fn, times) and used(fn, times) == 1
+
+def missed(fn: Callable[[], T], times: int) -> bool:
+    return not succeeds(fn, times)
